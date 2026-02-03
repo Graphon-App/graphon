@@ -1,0 +1,339 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+
+/* Configure dark mode to use 'class' selector instead of 'media' (prefers-color-scheme) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Graphon Colors */
+  --color-graphon-bg: #fffcf8;
+  --color-graphon-sidebar: #f8f6f2;
+  --color-graphon-border: rgba(55, 53, 47, 0.08);
+  --color-graphon-hover: rgba(55, 53, 47, 0.05);
+  --color-graphon-text-main: #2c2b27;
+  --color-graphon-text-secondary: rgba(44, 43, 39, 0.6);
+
+  --color-graphon-dark-bg: #202020;
+  --color-graphon-dark-sidebar: #252525;
+  --color-graphon-dark-border: rgba(255, 255, 255, 0.08);
+  --color-graphon-dark-hover: rgba(255, 255, 255, 0.04);
+  --color-graphon-dark-text-main: rgba(248, 246, 242, 0.9);
+  --color-graphon-dark-text-secondary: rgba(248, 246, 242, 0.5);
+
+  /* Accent Color */
+  --color-accent: #007aff;
+
+  /* System Gray */
+  --color-systemGray-1: #8e8e93;
+  --color-systemGray-2: #aeaeb2;
+  --color-systemGray-3: #c7c7cc;
+  --color-systemGray-4: #d1d1d6;
+  --color-systemGray-5: #e5e5ea;
+  --color-systemGray-6: #f2f2f7;
+
+  --color-systemGrayDark-1: #8e8e93;
+  --color-systemGrayDark-2: #636366;
+  --color-systemGrayDark-3: #48484a;
+  --color-systemGrayDark-4: #3a3a3c;
+  --color-systemGrayDark-5: #2c2c2e;
+  --color-systemGrayDark-6: #1c1c1e;
+
+  /* System Background */
+  --color-systemBackground-primary: #ffffff;
+  --color-systemBackground-secondary: #f2f2f7;
+  --color-systemBackground-tertiary: #ffffff;
+
+  --color-systemBackgroundDark-primary: #000000;
+  --color-systemBackgroundDark-secondary: #1c1c1e;
+  --color-systemBackgroundDark-tertiary: #2c2c2e;
+
+  /* System Blue */
+  --color-systemBlue-light: #007aff;
+  --color-systemBlue-dark: #0a84ff;
+
+  /* Fonts */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+
+  /* Backdrop Blur */
+  --backdrop-blur-xs: 2px;
+
+  /* Transition Duration */
+  --transition-duration-400: 400ms;
+
+  /* Transition Timing Function */
+  --ease-apple: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-squish: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Scale */
+  --scale-98: 0.98;
+  --scale-97: 0.97;
+}
+
+@layer base {
+  body {
+    @apply font-sans antialiased;
+    background: transparent !important;
+    @apply text-graphon-text-main dark:text-graphon-dark-text-main;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  #root {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Ensure all buttons have pointer cursor */
+  button {
+    cursor: pointer;
+  }
+}
+
+/* Aurora Card System - Floating Island Architecture */
+
+/* Main floating island card */
+@utility glass-card {
+  @apply rounded-2xl border;
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 4px 24px -1px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
+
+  &:where(.dark, .dark *) {
+    background: rgba(30, 30, 35, 0.75);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 4px 24px -1px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* Ghost sidebar - transparent floating text */
+@utility glass-ghost {
+  @apply bg-transparent border-none shadow-none;
+}
+
+/* Zoned Scrim System - True Vibrancy (no CSS blur, OS provides blur) */
+@utility scrim-high {
+  /* Lower opacity (~65-70%) for sidebars - lets native vibrancy shine through */
+  background: rgba(255, 255, 255, 0.65);
+  @apply rounded-xl;
+
+  &:where(.dark, .dark *) {
+    background: rgba(28, 28, 26, 0.7);
+  }
+}
+
+@utility scrim-low {
+  /* Glass state - very low opacity for maximum wallpaper bleed-through */
+  background: rgba(255, 255, 255, 0.25);
+  @apply rounded-2xl;
+  box-shadow:
+    0 4px 24px -1px rgba(0, 0, 0, 0.06),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+
+  &:where(.dark, .dark *) {
+    background: rgba(28, 28, 26, 0.25);
+    box-shadow:
+      0 4px 24px -1px rgba(0, 0, 0, 0.15),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  }
+}
+
+/* Specular Border - Light catching the edge of glass panels */
+@utility specular-border {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+
+  &:where(.dark, .dark *) {
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* Surface Opaque - Solid background for deep-work/editor views */
+@utility surface-opaque {
+  background: var(--color-graphon-bg);
+  @apply rounded-2xl;
+  box-shadow:
+    0 4px 24px -1px rgba(0, 0, 0, 0.08),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+
+  &:where(.dark, .dark *) {
+    background: var(--color-graphon-dark-bg);
+    box-shadow:
+      0 4px 24px -1px rgba(0, 0, 0, 0.2),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* Noise Overlay - Anodized aluminum / high-end paper texture */
+.noise-overlay {
+  position: relative;
+}
+
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  mix-blend-mode: overlay;
+  z-index: 1;
+}
+
+.dark .noise-overlay::after {
+  opacity: 0.04;
+  mix-blend-mode: soft-light;
+}
+
+/* Modal card - higher opacity for focus */
+@utility glass-modal {
+  @apply rounded-2xl shadow-2xl;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+
+  &:where(.dark, .dark *) {
+    background: rgba(25, 25, 30, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Smooth transitions */
+@utility transition-smooth {
+  @apply transition-all duration-400 ease-apple;
+}
+
+@utility transition-squish {
+  @apply transition-all duration-200 ease-squish;
+}
+
+/* Subtle Borders */
+.shadow-graphon {
+  @apply border border-graphon-border dark:border-graphon-dark-border;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.shadow-graphon-dark {
+  @apply border border-graphon-dark-border;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+}
+
+/* Interactives with squish */
+.btn-squish {
+  @apply transition-squish active:scale-95;
+}
+
+/* Event card styles - Graphon inspired */
+.event-card {
+  @apply rounded-lg px-3 py-2 cursor-pointer transition-squish;
+  @apply border border-graphon-border dark:border-graphon-dark-border;
+  @apply bg-white/60 dark:bg-white/5;
+  @apply hover:bg-white/90 dark:hover:bg-white/10;
+  font-size: 0.8rem;
+  line-height: 1.2;
+}
+
+/* Modal styles */
+.modal-overlay {
+  @apply fixed inset-0 bg-graphon-text-main/20 dark:bg-black/40;
+  @apply transition-smooth;
+  z-index: 1000;
+}
+
+.modal-content {
+  @apply glass-modal;
+  @apply transition-smooth;
+  z-index: 1001;
+}
+
+/* Current time indicator */
+.current-time-line {
+  @apply absolute left-0 right-0 h-0.5 bg-red-500 pointer-events-none;
+  z-index: 100;
+}
+
+.current-time-dot {
+  @apply absolute -left-1 -top-1 w-2 h-2 bg-red-500 rounded-full;
+}
+
+/* Custom scrollbar - Graphon style */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-graphon-border dark:bg-graphon-dark-border rounded-full;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-graphon-text-secondary/30 dark:bg-graphon-dark-text-secondary/30;
+}
+
+/* Tiptap Editor Styles - Graphon clean appearance */
+.ProseMirror,
+.graphon-editor .ProseMirror {
+  outline: none;
+  background: transparent;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'SF Pro Display',
+    'Segoe UI',
+    sans-serif;
+  color: inherit;
+  padding: 0 4px;
+}
+
+.graphon-editor .ProseMirror > * + * {
+  margin-top: 0.75em;
+}
+
+.graphon-editor .ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: #adb5bd;
+  pointer-events: none;
+  height: 0;
+  font-size: 1.125rem;
+}
+
+.graphon-editor .ProseMirror:focus {
+  outline: none;
+}
+
+/* Ensure proper line height for readability */
+.graphon-editor .ProseMirror p {
+  line-height: 1.75;
+}
+
+.graphon-editor .ProseMirror h1 {
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.graphon-editor .ProseMirror h2 {
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+/* Active Navigation Item */
+.nav-item-active {
+  @apply bg-neutral-200/50 dark:bg-white/10 text-black dark:text-white font-medium;
+  @apply shadow-xs border border-black/5 dark:border-white/5;
+  @apply rounded-md;
+}

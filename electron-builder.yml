@@ -1,0 +1,71 @@
+appId: com.graphon.app
+productName: Graphon
+directories:
+  buildResources: build
+files:
+  - '!**/.vscode/*'
+  - '!src/*'
+  - '!electron.vite.config.{js,ts,mjs,cjs}'
+  - '!{.eslintcache,eslint.config.mjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}'
+  - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
+asarUnpack:
+  - resources/**
+
+# WINDOWS
+win:
+  executableName: Graphon
+  icon: build/icon.ico # Windows için uygulama ikonu
+  target:
+    - nsis
+
+nsis:
+  # 1. İSİMLENDİRME
+  artifactName: 'Graphon-Installer-${version}.${ext}'
+
+  # 2. GÖRSELLİK
+  installerIcon: 'build/icon.ico'
+  uninstallerIcon: 'build/icon.ico'
+  installerHeaderIcon: 'build/icon.ico'
+  installerSidebar: 'build/installerSidebar.bmp' # Soldaki büyük resim
+  installerHeader: 'build/installerHeader.bmp' # Üstteki küçük resim
+
+  # 3. DAVRANIŞ
+  oneClick: false # Next-Next diyerek kurulsun
+  allowToChangeInstallationDirectory: true # Klasör seçebilsin
+  perMachine: false # Admin şifresi istemesin
+  createDesktopShortcut: always
+  runAfterFinish: true
+  deleteAppDataOnUninstall: true # Silerken temizlesin
+
+# MACOS (Disabled - Windows focus)
+# mac:
+#   target:
+#     - target: default
+#       arch:
+#         - universal # Hem M1/M2 hem Intel Mac'lerde çalışır
+#   icon: build/icon.png
+#   entitlementsInherit: build/entitlements.mac.plist
+#   notarize: false # Apple Developer hesabı olmadan build almak için
+# dmg:
+#   artifactName: ${name}-${version}.${ext}
+
+# LINUX (Disabled - Windows focus)
+# linux:
+#   icon: build/icon.png
+#   target:
+#     - target: AppImage # Portable
+#       arch:
+#         - x64
+#     - target: deb # Ubuntu Installer
+#       arch:
+#         - x64
+#   maintainer: itsmeares
+#   category: Utility
+# appImage:
+#   artifactName: ${name}-${version}.${ext}
+
+npmRebuild: false
+publish:
+  provider: github
+  owner: itsmeares
+  repo: Graphon
