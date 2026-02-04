@@ -67,5 +67,6 @@ nsis:
 npmRebuild: false
 publish:
   provider: github
-  owner: itsmeares
-  repo: Graphon
+  owner: Graphon-App
+  repo: graphon
+  releaseType: release

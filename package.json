@@ -1,13 +1,17 @@
 {
   "name": "graphon",
-  "version": "0.1.8",
-  "description": "Graphon - A graph-based personal knowledge management and note-taking application",
+  "productName": "Graphon",
+  "homepage": "https://github.com/Graphon-App/graphon#readme",
+  "version": "0.1.9",
+  "description": "Graphon - A privacy-focused personal knowledge management and note-taking application",
   "main": "./out/main/index.js",
   "author": "itsmeares",
-  "homepage": "https://github.com/itsmeares/Graphon",
   "repository": {
     "type": "git",
-    "url": "https://github.com/itsmeares/Graphon"
+    "url": "git+https://github.com/Graphon-App/graphon.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Graphon-App/graphon/issues"
   },
   "scripts": {
     "format": "prettier --write .",

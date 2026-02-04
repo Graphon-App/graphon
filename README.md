@@ -182,4 +182,4 @@ This project is licensed under the MIT License.
 
 ---
 
-**Graphon v0.1.8** - Modern, Minimalist, Masterful. 🚀
+**Graphon v0.1.9** - Modern, Minimalist, Masterful. 🚀
