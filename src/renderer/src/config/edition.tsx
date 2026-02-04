@@ -8,7 +8,7 @@
  * All Team-specific features are disabled and replaced with placeholder components.
  */
 
-import React, { ReactNode, createContext, useContext } from 'react'
+import { ReactNode, createContext, useContext } from 'react'
 
 export const EDITION = 'core' as const
 export const FEATURES = {
